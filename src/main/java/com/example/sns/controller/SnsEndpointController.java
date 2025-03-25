@@ -33,6 +33,7 @@ public class SnsEndpointController {
         
         try {
             SnsNotification notification = objectMapper.readValue(message, SnsNotification.class);
+            log.debug("Parsed notification: {}", notification);
             
             // Handle SNS subscription confirmation
             if ("SubscriptionConfirmation".equals(notification.getType())) {

@@ -8,27 +8,47 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SnsNotification {
     
-    private String Type;
-    private String MessageId;
-    private String TopicArn;
-    private String Subject;
-    private String Message;
-    private String Timestamp;
-    private String SignatureVersion;
-    private String Signature;
-    private String SigningCertURL;
-    private String UnsubscribeURL;
+    @JsonProperty("Type")
+    private String type;
+    
+    @JsonProperty("MessageId")
+    private String messageId;
+    
+    @JsonProperty("TopicArn")
+    private String topicArn;
+    
+    @JsonProperty("Subject")
+    private String subject;
+    
+    @JsonProperty("Message")
+    private String message;
+    
+    @JsonProperty("Timestamp")
+    private String timestamp;
+    
+    @JsonProperty("SignatureVersion")
+    private String signatureVersion;
+    
+    @JsonProperty("Signature")
+    private String signature;
+    
+    @JsonProperty("SigningCertURL")
+    private String signingCertURL;
+    
+    @JsonProperty("UnsubscribeURL")
+    private String unsubscribeURL;
     
     @JsonProperty("SubscribeURL")
     private String subscribeURL;
     
-    // Manually added getters
+    // No need for manual getters as @Data provides them
+    // But keeping these for backward compatibility
     public String getType() {
-        return Type;
+        return type;
     }
     
     public String getMessage() {
-        return Message;
+        return message;
     }
     
     public String getSubscribeURL() {
