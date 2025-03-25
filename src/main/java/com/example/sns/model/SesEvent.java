@@ -1,6 +1,7 @@
 package com.example.sns.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import java.util.List;
@@ -37,14 +38,25 @@ public class SesEvent {
         private String timestamp;
         private String messageId;
         private String source;
+        private String sendingAccountId;
         private List<String> destination;
-        private Map<String, String> commonHeaders;
-        private Map<String, String> headers;
+        private Boolean headersTruncated;
+        private List<Header> headers;
+        
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        private Map<String, Object> commonHeaders;
         
         // Manually added getter for messageId
         public String getMessageId() {
             return messageId;
         }
+    }
+    
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Header {
+        private String name;
+        private String value;
     }
     
     @Data

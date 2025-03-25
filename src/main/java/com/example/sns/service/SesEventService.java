@@ -30,6 +30,7 @@ public class SesEventService {
      */
     public void processSesEvent(String message) {
         try {
+            log.debug("Raw SES event message: {}", message);
             SesEvent sesEvent = objectMapper.readValue(message, SesEvent.class);
             log.info("Processing SES event: {}", sesEvent.getEventType());
             
@@ -43,6 +44,9 @@ public class SesEventService {
                     break;
                 case "Delivery":
                     handleDelivery(sesEvent);
+                    break;
+                case "Open":
+                    handleOpen(sesEvent);
                     break;
                 default:
                     log.info("Unhandled event type: {}", sesEvent.getEventType());
@@ -80,5 +84,10 @@ public class SesEventService {
     private void handleDelivery(SesEvent sesEvent) {
         log.info("Handling delivery event for message: {}", sesEvent.getMail().getMessageId());
         // Implement delivery handling logic here
+    }
+    
+    private void handleOpen(SesEvent sesEvent) {
+        log.info("Handling open event for message: {}", sesEvent.getMail().getMessageId());
+        // Implement open event handling logic here
     }
 }
